@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">newsee</string>
+    <string name="app_name">Newsee</string>
+    <string name="main_headline">Headline News</string>
+    <string name="main_latest">Latest News</string>
 </resources>

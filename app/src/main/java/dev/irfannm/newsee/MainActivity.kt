@@ -21,17 +21,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getHeadlines()
 
-        val headlineRecyclerView: RecyclerView = findViewById(R.id.headline_recycler_view)
-        headlineRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && !isLoading) {
-                    loadHeadlineOnScroll()
-                }
-            }
-        })
+//        val headlineRecyclerView: RecyclerView = findViewById(R.id.headline_recycler_view)
+//        headlineRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE && !isLoading) {
+//                    loadHeadlineOnScroll()
+//                }
+//            }
+//        })
     }
     private fun getHeadlines() {
-        val news = NewsService.newsInterface.getHeadlines("id", headlinePage++)
+        val news = NewsService.newsInterface.getHeadlines("us", headlinePage++)
         news.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val headlineNews = response.body()
