@@ -66,11 +66,9 @@ class MainActivity : AppCompatActivity() {
                     val allNewsAdapter = AllNewsAdapter(this@MainActivity, allNews.articles)
                     val recyclerView: RecyclerView = findViewById(R.id.all_news_recycler_view)
                     val linearLayoutManager = LinearLayoutManager(this@MainActivity)
-                    val snapHelper = LinearSnapHelper()
                     recyclerView.adapter = allNewsAdapter
                     recyclerView.layoutManager = linearLayoutManager
                     recyclerView.setHasFixedSize(true)
-//                    snapHelper.attachToRecyclerView(recyclerView)
                 }
             }
 

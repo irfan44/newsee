@@ -1,11 +1,17 @@
 package dev.irfannm.newsee.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import dev.irfannm.newsee.R
@@ -18,12 +24,14 @@ class HeadlineAdapter(var context: Context?, private val articles: List<Article>
         val sourceText: TextView
         val publishDateText: TextView
         val newsImage: ImageView
+        val headlineCard: CardView
 
         init {
             titleText = itemView.findViewById(R.id.titleText)
             sourceText = itemView.findViewById(R.id.sourceText)
             publishDateText = itemView.findViewById(R.id.publishedAtText)
             newsImage = itemView.findViewById(R.id.newsImage)
+            headlineCard = itemView.findViewById(R.id.headlineCard)
         }
     }
 
@@ -42,5 +50,11 @@ class HeadlineAdapter(var context: Context?, private val articles: List<Article>
         val publishedDate = FormatDate().formatDate(articles[holder.adapterPosition].publishedAt)
         holder.publishDateText.text = publishedDate
         Glide.with(context!!).load(articles[holder.adapterPosition].urlToImage).override(310, 110).into(holder.newsImage)
+
+        holder.headlineCard.setOnClickListener {
+            val uri = Uri.parse(articles[holder.adapterPosition].url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(context!!, intent, null)
+        }
     }
 }
