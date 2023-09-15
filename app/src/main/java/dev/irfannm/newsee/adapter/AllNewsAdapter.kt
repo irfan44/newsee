@@ -11,8 +11,11 @@ import com.bumptech.glide.Glide
 import dev.irfannm.newsee.R
 import dev.irfannm.newsee.data.Article
 import dev.irfannm.newsee.util.FormatDate
+import java.text.DateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class HeadlineAdapter(var context: Context?, private val articles: List<Article>) : RecyclerView.Adapter<HeadlineAdapter.ViewHolder>() {
+class AllNewsAdapter(var context: Context?, private val articles: List<Article>) : RecyclerView.Adapter<AllNewsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val titleText: TextView
         val sourceText: TextView
@@ -21,14 +24,14 @@ class HeadlineAdapter(var context: Context?, private val articles: List<Article>
 
         init {
             titleText = itemView.findViewById(R.id.titleText)
-            sourceText = itemView.findViewById(R.id.sourceText)
-            publishDateText = itemView.findViewById(R.id.publishedAtText)
+            sourceText = itemView.findViewById(R.id.sourceAllNewsText)
+            publishDateText = itemView.findViewById(R.id.publishDateAllNewsText)
             newsImage = itemView.findViewById(R.id.newsImage)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.headline_news_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.latest_news_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -41,6 +44,6 @@ class HeadlineAdapter(var context: Context?, private val articles: List<Article>
         holder.sourceText.text = articles[holder.adapterPosition].source.name
         val publishedDate = FormatDate().formatDate(articles[holder.adapterPosition].publishedAt)
         holder.publishDateText.text = publishedDate
-        Glide.with(context!!).load(articles[holder.adapterPosition].urlToImage).override(310, 110).into(holder.newsImage)
+        Glide.with(context!!).load(articles[holder.adapterPosition].urlToImage).override(148, 148).into(holder.newsImage)
     }
 }
